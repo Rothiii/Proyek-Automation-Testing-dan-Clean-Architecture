@@ -1,0 +1,55 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: forumapi-postgres
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_DB: forumapi
+    ports:
+      - '5432:5432'
+    volumes:
+      - forumapi-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U developer -d forumapi']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  postgres-test:
+    image: postgres:16
+    container_name: forumapi-postgres-test
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_DB: forumapi_test
+    ports:
+      - '5433:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U developer -d forumapi_test']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: forumapi-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: developer
+      PGPASSWORD: supersecret
+      PGDATABASE: forumapi
+      ACCESS_TOKEN_KEY: supersecret
+    ports:
+      - '3000:3000'
+    command: sh -c "npm run migrate up && npm run start"
+
+volumes:
+  forumapi-data:
