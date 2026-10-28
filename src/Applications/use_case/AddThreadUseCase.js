@@ -1,4 +1,5 @@
 import NewThread from '../../Domains/threads/entities/NewThread.js';
+import AddedThread from '../../Domains/threads/entities/AddedThread.js';
 
 class AddThreadUseCase {
   constructor({ threadRepository }) {
@@ -9,11 +10,13 @@ class AddThreadUseCase {
     const { owner } = useCasePayload;
     const newThread = new NewThread(useCasePayload);
 
-    return this._threadRepository.addThread({
+    const addedThread = await this._threadRepository.addThread({
       title: newThread.title,
       body: newThread.body,
       owner,
     });
+
+    return new AddedThread(addedThread);
   }
 }
 
