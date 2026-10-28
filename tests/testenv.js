@@ -10,4 +10,4 @@ dotenv.config({ path: '.test.env' });
 // .test.env is intentionally absent. Real values still win when present.
 process.env.ACCESS_TOKEN_KEY = process.env.ACCESS_TOKEN_KEY || 'test-access-token-key';
 process.env.REFRESH_TOKEN_KEY = process.env.REFRESH_TOKEN_KEY || 'test-refresh-token-key';
-process.env.ACCCESS_TOKEN_AGE = process.env.ACCCESS_TOKEN_AGE || '3000';
+process.env.ACCESS_TOKEN_AGE = process.env.ACCESS_TOKEN_AGE || '3000';

@@ -47,6 +47,8 @@ services:
       PGPASSWORD: supersecret
       PGDATABASE: forumapi
       ACCESS_TOKEN_KEY: supersecret
+      REFRESH_TOKEN_KEY: supersecret-refresh-token-key
+      ACCESS_TOKEN_AGE: 3000
     ports:
       - '3000:3000'
     command: sh -c "npm run migrate up && npm run start"
