@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+.DS_Store
+.env
+.test.env
+.vscode/
+*.log
+npm-debug.log*
