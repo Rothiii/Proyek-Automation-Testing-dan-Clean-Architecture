@@ -12,9 +12,10 @@ FROM node:22-alpine AS production
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Salin node_modules hasil tahap base apa adanya. Install ulang dengan --omit=dev
+# membuat node-pg-migrate hilang, padahal perintah start butuh paket itu untuk migrasi.
 COPY package*.json ./
-RUN npm ci --omit=dev
-
+COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/src ./src
 COPY --from=base /app/migrations ./migrations
 
