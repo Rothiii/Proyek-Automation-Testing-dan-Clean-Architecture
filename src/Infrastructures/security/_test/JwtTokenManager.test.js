@@ -49,10 +49,10 @@ describe('JwtTokenManager', () => {
     it('should throw InvariantError when verification failed', async () => {
       // Arrange
       const jwtTokenManager = new JwtTokenManager(jwt);
-      const accessToken = await jwtTokenManager.createAccessToken({ username: 'dicoding' });
+      const tokenWithWrongKey = jwt.sign({ username: 'dicoding' }, `${config.auth.refreshTokenKey}-salah`);
 
       // Action & Assert
-      await expect(jwtTokenManager.verifyRefreshToken(accessToken))
+      await expect(jwtTokenManager.verifyRefreshToken(tokenWithWrongKey))
         .rejects
         .toThrow(InvariantError);
     });
