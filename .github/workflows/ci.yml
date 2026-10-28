@@ -33,6 +33,8 @@ jobs:
       PGPASSWORD: supersecret
       PGDATABASE: forumapi_test
       ACCESS_TOKEN_KEY: supersecret
+      REFRESH_TOKEN_KEY: supersecret-refresh
+      ACCCESS_TOKEN_AGE: 3000
 
     steps:
       - uses: actions/checkout@v4
