@@ -46,6 +46,9 @@ jobs:
       - name: Pasang dependensi
         run: npm ci
 
+      - name: Periksa gaya penulisan kode
+        run: npm run lint
+
       - name: Jalankan migrasi basis data pengujian
         run: npm run migrate:test up
 
