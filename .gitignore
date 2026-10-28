@@ -1,6 +1,7 @@
 node_modules/
 coverage/
 .DS_Store
-.env.example
 *.log
 npm-debug.log*
+.env
+.test.env
