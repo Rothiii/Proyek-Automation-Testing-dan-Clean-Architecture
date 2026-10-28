@@ -24,6 +24,14 @@ class JwtTokenManager extends AuthenticationTokenManager {
     }
   }
 
+  async verifyAccessToken(token) {
+    try {
+      return this._jwt.verify(token, config.auth.accessTokenKey);
+    } catch (error) {
+      throw new InvariantError('access token tidak valid');
+    }
+  }
+
   async decodePayload(token) {
     const payload = this._jwt.decode(token);
     return payload;
