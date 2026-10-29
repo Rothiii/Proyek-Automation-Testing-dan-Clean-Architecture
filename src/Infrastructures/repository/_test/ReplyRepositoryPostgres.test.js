@@ -143,19 +143,19 @@ describe('ReplyRepositoryPostgres', () => {
       expect(replies).toHaveLength(2);
       expect(replies[0]).toStrictEqual({
         id: 'reply-1',
-        commentId: 'comment-123',
+        comment_id: 'comment-123',
         content: 'balasan satu',
-        date: '2021-08-08T07:20:09.775Z',
+        date: new Date('2021-08-08T07:20:09.775Z'),
         username: 'dicoding',
-        isDelete: false,
+        is_delete: false,
       });
       expect(replies[1]).toStrictEqual({
         id: 'reply-2',
-        commentId: 'comment-123',
+        comment_id: 'comment-123',
         content: 'balasan dua',
-        date: '2021-08-08T07:22:09.775Z',
+        date: new Date('2021-08-08T07:22:09.775Z'),
         username: 'johndoe',
-        isDelete: true,
+        is_delete: true,
       });
     });
 

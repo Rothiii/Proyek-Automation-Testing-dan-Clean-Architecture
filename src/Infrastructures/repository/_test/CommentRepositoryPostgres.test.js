@@ -138,7 +138,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[0].username).toEqual('dicoding');
       expect(comments[1].id).toEqual('comment-2');
       expect(comments[1].username).toEqual('johndoe');
-      expect(comments[0].isDelete).toEqual(false);
+      expect(comments[0].is_delete).toEqual(false);
     });
   });
 });
