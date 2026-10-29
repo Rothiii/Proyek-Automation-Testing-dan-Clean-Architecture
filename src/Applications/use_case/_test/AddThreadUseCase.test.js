@@ -1,4 +1,5 @@
 import AddThreadUseCase from '../AddThreadUseCase.js';
+import AddedThread from '../../../Domains/threads/entities/AddedThread.js';
 import ThreadRepository from '../../../Domains/threads/ThreadRepository.js';
 
 describe('AddThreadUseCase', () => {
@@ -9,10 +10,11 @@ describe('AddThreadUseCase', () => {
       body: 'sebuah body thread',
       owner: 'user-123',
     };
+
     const mockAddedThread = {
-      id: 'thread-123',
-      title: 'sebuah thread',
-      owner: 'user-123',
+      id: 'thread-999',
+      title: 'judul dari repository',
+      owner: 'user-999',
     };
 
     const mockThreadRepository = new ThreadRepository();
@@ -27,7 +29,11 @@ describe('AddThreadUseCase', () => {
     const addedThread = await addThreadUseCase.execute(useCasePayload);
 
     // Assert
-    expect(addedThread).toEqual(mockAddedThread);
+    expect(addedThread).toStrictEqual(new AddedThread({
+      id: 'thread-999',
+      title: 'judul dari repository',
+      owner: 'user-999',
+    }));
     expect(mockThreadRepository.addThread).toBeCalledWith({
       title: useCasePayload.title,
       body: useCasePayload.body,

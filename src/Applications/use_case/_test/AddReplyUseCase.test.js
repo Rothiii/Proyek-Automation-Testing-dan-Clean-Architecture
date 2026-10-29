@@ -1,4 +1,5 @@
 import AddReplyUseCase from '../../use_case/AddReplyUseCase.js';
+import AddedReply from '../../../Domains/replies/entities/AddedReply.js';
 
 describe('AddReplyUseCase', () => {
   it('should orchestrating the add reply action correctly', async () => {
@@ -10,12 +11,14 @@ describe('AddReplyUseCase', () => {
       owner: 'user-123',
     };
 
+    const mockAddedReply = {
+      id: 'reply-999',
+      content: 'balasan dari repository',
+      owner: 'user-999',
+    };
+
     const mockReplyRepository = {
-      addReply: vi.fn().mockResolvedValue({
-        id: 'reply-123',
-        content: 'sebuah balasan',
-        owner: 'user-123',
-      }),
+      addReply: vi.fn().mockResolvedValue(mockAddedReply),
     };
 
     const mockCommentRepository = {
@@ -36,11 +39,11 @@ describe('AddReplyUseCase', () => {
     const addedReply = await addReplyUseCase.execute(useCasePayload);
 
     // Assert
-    expect(addedReply).toEqual({
-      id: 'reply-123',
-      content: 'sebuah balasan',
-      owner: 'user-123',
-    });
+    expect(addedReply).toStrictEqual(new AddedReply({
+      id: 'reply-999',
+      content: 'balasan dari repository',
+      owner: 'user-999',
+    }));
     expect(mockThreadRepository.verifyThreadExists).toBeCalledWith('thread-123');
     expect(mockCommentRepository.verifyCommentExists).toBeCalledWith('comment-123');
     expect(mockReplyRepository.addReply).toBeCalledWith({

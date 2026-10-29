@@ -22,16 +22,16 @@ describe('GetThreadDetailUseCase', () => {
         {
           id: 'comment-1',
           content: 'komentar pertama',
-          date: '2021-08-08T07:20:09.775Z',
+          date: new Date('2021-08-08T07:20:09.775Z'),
           username: 'johndoe',
-          isDelete: false,
+          is_delete: false,
         },
         {
           id: 'comment-2',
           content: 'komentar yang sudah dihapus',
-          date: '2021-08-08T07:21:09.775Z',
+          date: new Date('2021-08-08T07:21:09.775Z'),
           username: 'dicoding',
-          isDelete: true,
+          is_delete: true,
         },
       ]),
     };
@@ -40,19 +40,19 @@ describe('GetThreadDetailUseCase', () => {
       getRepliesByThreadId: vi.fn().mockResolvedValue([
         {
           id: 'reply-1',
-          commentId: 'comment-1',
+          comment_id: 'comment-1',
           content: 'balasan pertama',
-          date: '2021-08-08T07:22:09.775Z',
+          date: new Date('2021-08-08T07:22:09.775Z'),
           username: 'dicoding',
-          isDelete: false,
+          is_delete: false,
         },
         {
           id: 'reply-2',
-          commentId: 'comment-1',
+          comment_id: 'comment-1',
           content: 'balasan yang sudah dihapus',
-          date: '2021-08-08T07:23:09.775Z',
+          date: new Date('2021-08-08T07:23:09.775Z'),
           username: 'johndoe',
-          isDelete: true,
+          is_delete: true,
         },
       ]),
     };
@@ -68,6 +68,9 @@ describe('GetThreadDetailUseCase', () => {
 
     // Assert
     expect(mockThreadRepository.verifyThreadExists).toBeCalledWith(threadId);
+    expect(mockThreadRepository.getThreadById).toBeCalledWith(threadId);
+    expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(threadId);
+    expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith(threadId);
     expect(thread).toStrictEqual({
       id: 'thread-123',
       title: 'sebuah thread',
