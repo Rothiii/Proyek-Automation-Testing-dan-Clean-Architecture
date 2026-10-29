@@ -1,5 +1,3 @@
-import InvariantError from '../../../Commons/exceptions/InvariantError.js';
-
 class NewReply {
   constructor(payload) {
     this._verifyPayload(payload);
@@ -11,11 +9,11 @@ class NewReply {
 
   _verifyPayload({ content }) {
     if (!content) {
-      throw new InvariantError('NEW_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
+      throw new Error('NEW_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
     if (typeof content !== 'string') {
-      throw new InvariantError('NEW_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
+      throw new Error('NEW_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
   }
 }

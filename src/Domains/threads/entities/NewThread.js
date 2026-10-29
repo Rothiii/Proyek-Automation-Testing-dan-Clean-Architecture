@@ -1,5 +1,3 @@
-import InvariantError from '../../../Commons/exceptions/InvariantError.js';
-
 class NewThread {
   constructor(payload) {
     this._verifyPayload(payload);
@@ -12,11 +10,11 @@ class NewThread {
 
   _verifyPayload({ title, body }) {
     if (!title || !body) {
-      throw new InvariantError('NEW_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+      throw new Error('NEW_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
     if (typeof title !== 'string' || typeof body !== 'string') {
-      throw new InvariantError('NEW_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+      throw new Error('NEW_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
   }
 }
